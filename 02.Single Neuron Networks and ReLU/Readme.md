@@ -10,3 +10,4 @@ This function is key for introducing non-linearity, enabling neural networks to 
 
 ## Neuron Simulation
 
+![AI is fun!](/Assets/Images/SingleNode.png "Single Node Neuron")
