@@ -21,17 +21,7 @@ def single_neuron_network(weights, bias, inputs):
     # Apply the ReLU activation function
     activated_output = relu(output_before_activation)
 
-    # Add the calculation step
-    calculation_steps = [f"({w})*({x})" for w, x in zip(weights, inputs)]
-    calculation_steps.append(f"({bias})")
-    output_text = "w*x + b = " + " + ".join(calculation_steps)
-    output_text += f" = {output_before_activation}\n"
 
-    # Add the ReLU step
-    output_text += f"ReLU: {output_before_activation} → {activated_output} because "
-    output_text += f"{output_before_activation} is {'negative' if output_before_activation < 0 else 'non-negative'}."
-
-    print(output_text)
     return output_before_activation, activated_output
 
 
