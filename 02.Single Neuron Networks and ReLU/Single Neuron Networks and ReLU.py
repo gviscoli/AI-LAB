@@ -47,7 +47,7 @@ output_before_activation, activated_output = single_neuron_network(weights, bias
 
 print("\n")
 
-print("output_before_activation: " + output_before_activation)
+print("output_before_activation: ", output_before_activation)
 print("\n")
-print("activated_output: " + activated_output)
+print("activated_output: ", activated_output)
 print("\n")
