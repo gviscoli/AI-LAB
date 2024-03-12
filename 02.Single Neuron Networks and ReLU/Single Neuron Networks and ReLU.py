@@ -16,9 +16,11 @@ def relu(x):
 def single_neuron_network(weights, bias, inputs):
 
     # Calculate the neuron's output before activation
+    #
     output_before_activation = sum(w * i for w, i in zip(weights, inputs)) + bias
 
     # Apply the ReLU activation function
+    #
     activated_output = relu(output_before_activation)
 
 
