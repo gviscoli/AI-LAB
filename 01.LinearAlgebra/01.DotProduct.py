@@ -28,9 +28,7 @@ print("Start time:", startTime)
 print("End time:", endTime)
 
 print("dot_product = "+ str(dot)); 
-print("Computation Start time = " + str(1000*(endTime - startTime)) + "ms") 
-print("Computation End time = " + str((endTime - startTime))) 
-
+print("Computation time = " + str(1000*(endTime - startTime)) + "ms") 
 
 print("\n")
 
@@ -42,8 +40,7 @@ print("n_tic:", n_tic)
 print("n_toc:", n_toc)
 
 print("\nn_dot_product = "+str(n_dot_product)) 
-print("Computation Start time = "+str(1000*(n_toc - n_tic ))+"ms") 
-print("Computation End time = "+str((n_toc - n_tic ))) 
+print("Computation time = "+str(1000*(n_toc - n_tic ))+"ms") 
 
 
 print("\nTest difference: ",dot-n_dot_product)
