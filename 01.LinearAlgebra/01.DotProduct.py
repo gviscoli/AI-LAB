@@ -2,17 +2,24 @@
 import time 
 import numpy 
 import array
+import os
+
+# Configuration
+#
+max_range = 900000
+start_number = 200000
 
 # 8 bytes size int 
 a = array.array('q') 
-for i in range(1000000): 
+for i in range(max_range): 
     a.append(i); 
   
 b = array.array('q') 
-for i in range(1000000, 2000000): 
+for i in range(start_number, start_number+max_range): 
     b.append(i) 
 
-      
+os.system('cls')
+
 # dot product of vectors implementation  
 # loop version
 #
@@ -20,7 +27,7 @@ startTime = time.process_time()
 dot = 0; 
 
 for i in range(len(a)):
-      dot += a[i] * b[i] 
+      dot += a[i]*b[i] 
   
 endTime = time.process_time() 
 
@@ -44,3 +51,8 @@ print("Computation time = "+str(1000*(n_toc - n_tic ))+"ms")
 
 
 print("\nTest difference: ",dot-n_dot_product)
+
+print("\n")
+
+print("Check", dot==n_dot_product)
+
