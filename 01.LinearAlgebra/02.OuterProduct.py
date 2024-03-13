@@ -3,30 +3,34 @@ import time
 import numpy 
 import array 
   
-a = array.array('i') 
+a = array.array('i')
 for i in range(2000): 
     a.append(i); 
   
 b = array.array('i') 
 for i in range(2000, 4000): 
     b.append(i) 
-  
+
+print(a)
+print(b)
+
 # classic outer product of vectors implementation  
-tic = time.process_time() 
-outer_product = numpy.zeros((2000, 2000)) 
+#
+startTime = time.process_time() 
+outer_product = numpy.zeros((200, 200)) 
   
 for i in range(len(a)): 
    for j in range(len(b)): 
       outer_product[i][j]= a[i]*b[j] 
   
-toc = time.process_time() 
+endTime = time.process_time() 
   
 print("outer_product = "+ str(outer_product)); 
-print("Computation time = "+str(1000*(toc - tic ))+"ms") 
+print("Computation time = "+str(1000*(endTime - startTime ))+"ms") 
    
-n_tic = time.process_time() 
+n_startTime = time.process_time() 
 outer_product = numpy.outer(a, b) 
-n_toc = time.process_time() 
+n_endTime = time.process_time() 
   
 print("outer_product = "+str(outer_product)); 
-print("\nComputation time = "+str(1000*(n_toc - n_tic ))+"ms") 
+print("\nComputation time = "+str(1000*(n_endTime - n_startTime ))+"ms") 
