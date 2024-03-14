@@ -11,12 +11,14 @@ import tensorflow as tf
 from scipy.sparse import csr_matrix
 import pickle
 
+import seaborn as sns                       #visualisation
+import matplotlib.pyplot as plt             #visualisation
+
 # STEP BY STEP
 #
 # https://www.kaggle.com/code/chayandatta/language-detection-model-using-tensorflow
 
-# import seaborn as sns                       #visualisation
-# import matplotlib.pyplot as plt             #visualisation
+
 
 import os
 
@@ -30,3 +32,47 @@ language_counts = df["Language"].value_counts().reset_index()
 language_counts.columns = ["Language", "Count"]
 
 print(language_counts)
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Count', y='Language', data=language_counts, palette='muted')
+plt.xlabel('Count')
+plt.ylabel('Language')
+plt.title('Language Distribution')
+plt.tight_layout()
+plt.show()
+
+# splitting the df to test and train data
+train_texts, test_texts, train_labels, test_labels = train_test_split(df['Text'], df['Language'], test_size=0.2, random_state=42)
+
+# Tokenize and vectorize the text data
+vectorizer = CountVectorizer()
+X_train = vectorizer.fit_transform(train_texts)
+X_test = vectorizer.transform(test_texts)
+
+# Encode the language labels
+label_encoder = LabelEncoder()
+y_train = label_encoder.fit_transform(train_labels)
+y_test = label_encoder.transform(test_labels)
+
+# Let's Build the model
+
+model = models.Sequential([
+    layers.Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(len(label_encoder.classes_), activation='softmax')
+])
+#rectified linear unit (ReLU)
+
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# manually splitting the data
+X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+
+# Convert sparse matrices to TensorFlow Sparse Tensors
+
+X_train_sparse = tf.convert_to_tensor(csr_matrix(X_train).todense(), dtype=tf.float32)
+X_val_sparse = tf.convert_to_tensor(csr_matrix(X_val).todense(), dtype=tf.float32)
+X_test_sparse = tf.convert_to_tensor(csr_matrix(X_test).todense(), dtype=tf.float32)
+
+history = model.fit(X_train_sparse, y_train, epochs=10, batch_size=32, validation_data=(X_val_sparse, y_val))
+
