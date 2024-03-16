@@ -33,29 +33,25 @@ language_counts.columns = ["Language", "Count"]
 
 print(language_counts)
 
-plt.figure(figsize=(10, 6))
-sns.barplot(x='Count', y='Language', data=language_counts, palette='muted')
-plt.xlabel('Count')
-plt.ylabel('Language')
-plt.title('Language Distribution')
-plt.tight_layout()
-plt.show()
 
 # splitting the df to test and train data
+#
 train_texts, test_texts, train_labels, test_labels = train_test_split(df['Text'], df['Language'], test_size=0.2, random_state=42)
 
 # Tokenize and vectorize the text data
+#
 vectorizer = CountVectorizer()
 X_train = vectorizer.fit_transform(train_texts)
 X_test = vectorizer.transform(test_texts)
 
 # Encode the language labels
+#
 label_encoder = LabelEncoder()
 y_train = label_encoder.fit_transform(train_labels)
 y_test = label_encoder.transform(test_labels)
 
 # Let's Build the model
-
+#
 model = models.Sequential([
     layers.Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
     layers.Dense(64, activation='relu'),

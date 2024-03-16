@@ -16,5 +16,5 @@ The tensor product of two coordinate vectors is termed as Outer product. Let’s
 ## Wise Product
 Element-wise multiplication of two matrices is the algebraic operation in which each element of first matrix is multiplied by its corresponding element in the later matrix. Dimension of the matrices should be same. Consider two matrices a and b, index of an element in a is i and j then a(i, j) is multiplied with b(i, j) respectively as shown in the figure below
 
-![Linear Algebra is fun!](/Assets/Images/OuterProduct.png "Wise Product")
+![Linear Algebra is fun!](/Assets/Images/WiseProduct.png "Wise Product")
 
