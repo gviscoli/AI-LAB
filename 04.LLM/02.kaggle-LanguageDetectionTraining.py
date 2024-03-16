@@ -10,7 +10,7 @@ from keras import layers, models
 import tensorflow as tf
 from scipy.sparse import csr_matrix
 import pickle
-
+import dill
 
 # STEP BY STEP
 #
@@ -71,5 +71,18 @@ X_test_sparse = tf.convert_to_tensor(csr_matrix(X_test).todense(), dtype=tf.floa
 # Addestra il modello 
 history = model.fit(X_train_sparse, y_train, epochs=10, batch_size=32, validation_data=(X_val_sparse, y_val))
 
+# Time to Evaluate the model
+
+# predictions = model.predict(X_test)
+# y_pred = predictions.argmax(axis=1)
+# accuracy = accuracy_score(y_test, y_pred)
+# print(f'Test Accuracy: {accuracy * 100:.2f}%')
+
 # Salva il modello sul disco
-model.save('Assets/Models/kaggle/language-detection/LanguageDetection_model.keras')
+model.save('Assets/Models/kaggle/language-detection/LanguageDetection_model.h5')
+
+test = models.load_model('Assets/Models/kaggle/language-detection/LanguageDetection_model.h5')
+
+#model.save('Assets/Models/kaggle/language-detection/language_detection_model-0.0.1.pkl')
+# with open('Assets/Models/kaggle/language-detection/language_detection_model-0.0.1.pkl', 'wb') as model_file:
+#     dill.dump(model, model_file)

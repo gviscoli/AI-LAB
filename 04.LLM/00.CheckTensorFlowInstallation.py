@@ -24,4 +24,3 @@ if __name__ == "__main__":
     
     print(hasattr(tf, 'keras'))
 
-    print("Result: ",tf.reduce_sum(tf.random.normal([1000, 1000])))
